@@ -1,5 +1,7 @@
-from django.shortcuts import render
-
+from django.shortcuts import redirect, render
+from django.contrib import auth
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):

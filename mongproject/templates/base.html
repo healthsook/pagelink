@@ -25,6 +25,11 @@
         }
         
     </style>
+    <script>
+        $.ajaxSetup({
+          headers: { "X-CSRFToken": '{{csrf_token}}' }
+        });
+      </script>
 </head>
 
 
@@ -38,6 +43,8 @@
             <li><a href="{% url 'mongs' %}">체질몽</a></li>
             <li><a href="{% url 'record' %}">운동기록</a></li>
         </ul>
+        <button type = "button"><a href ="{% url 'accounts:showlogin' %}">로그인</a></button>
+        <button type = "button"><a href ="{% url 'accounts:logout' %}">로그아웃</a></button>
         {% block content %}
         {% endblock %}
     </nav>
