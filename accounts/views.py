@@ -1,51 +1,71 @@
-from django.contrib import auth 
-from django.contrib.auth.forms import UserCreationForm 
-from django.contrib.auth.models import User 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
-from flask import Flask, request, render_template, flash, jsonify
+from django.db import transaction
+from .models import Users
+from argon2 import PasswordHasher
+from .forms import RegisterForm, LoginForm
 
-def showlogin(request):
-    return render(request, 'login.html')
+# Create your views here.
 
-def showhome(request):
-    return render(request, 'home.html')
-
-def signup_done(request):
-    return render(request, 'signup_done.html')
-
+# 회원 가입
 def signup(request):
-    if request.method == 'POST': 
-        if request.POST['password1'] == request.POST['password2']: 
-            user = User.objects.create_user( 
-			        username=request.POST['username'], 
-			        password=request.POST['password1'], 
-			        email=request.POST['email'],
+    register_form = RegisterForm()
+    context = {'forms' : register_form}
+
+    if request.method == 'GET':
+        return render(request, 'signup.html', context)
+
+    elif request.method == 'POST':
+        registerform = RegisterForm(request.POST)
+        if registerform.is_valid():
+            user = Users(
+                user_id=registerform.user_id,
+                user_pw=registerform.user_pw,
+                user_name=registerform.user_name,
+                user_email=registerform.user_email
             )
-            auth.login(request, user)
-            #return redirect('/signup_done')
-            return render(request, 'signup_done.html')
-        return render(request, 'signup.html')
-    else:
-        form = UserCreationForm
-        return render(request, 'signup.html', {'form':form})
+            user.save()
+            #login(request, user)
+            return redirect("home")
+        else:
+            context['forms'] = registerform
+            if registerform.errors:
+                for value in registerform.errors.values():
+                    context['error'] = value
+        return render(request, 'signup.html', context)
 
 def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            flash("Done")
+    loginform = LoginForm()
+    context = { 'forms' : loginform }
+
+    if request.method == 'GET':
+        return render(request, 'login.html', context)
+
+    elif request.method == 'POST':
+        loginform = LoginForm(request.POST)
+        user_id = request.POST['user_id']
+        if loginform.is_valid():
+            request.session['login_session'] = loginform.login_session
+            request.session.set_expiry(0)
             return redirect('/')
         else:
-            flash("아이디/비밀번호가 일치하지 않습니다.")
-            return render(request, 'signup.html', {'error': 'username or password is incorrect.'})
-    else:
-        flash("login again")
-        return render(request, 'login.html')
+            context['forms'] = loginform
+            if loginform.errors:
+                for value in loginform.errors.values():
+                    context['error'] = value
+        return render(request, 'login.html', context)
 
+# 로그 아웃
 def logout(request):
-    auth.logout(request)
+    request.session.flush()
     return redirect('/')
+
+
+def hello(request):
+    context = {}
+    login_session = request.session.get('login_session', '')
+
+    if login_session == '':
+        context['login_session'] = False
+    else:
+        context['login_session'] = True
+    return render(request, 'home.html', context)
