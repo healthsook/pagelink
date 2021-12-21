@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from mongapp.views import home
 import mongapp.views
+import accounts.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mongapp.views.home, name="home"),
+    path('', home, name="home"),
     path('mongapp/', include('mongapp.urls')),
     path('accounts/', include('accounts.urls')),
 ]

@@ -5,8 +5,10 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
-
+    login_session = request.session.get('login_session', '')
+    context = { 'login_session' : login_session }
+    return render(request, 'home.html', context)
+    
 def information(request):
     return render(request, 'infor.html')
 
@@ -21,6 +23,12 @@ def record(request):
 
 def test(request):
     return render(request, 'test.html')
+
+def test2(request):
+    return render(request, 'test2.html')
+
+def test3(request):
+    return render(request, 'test3.html')
 
 def result(request):
     return render(request, 'result.html')
