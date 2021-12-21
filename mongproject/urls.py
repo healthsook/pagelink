@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mongapp.views.home, name="home"),
     path('mongapp/', include('mongapp.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
