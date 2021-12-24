@@ -10,7 +10,7 @@ from .forms import RegisterForm, LoginForm
 def signup(request):
     register_form = RegisterForm()
     context = {'forms' : register_form}
-
+    
     if request.method == 'GET':
         return render(request, 'signup.html', context)
 
@@ -21,7 +21,8 @@ def signup(request):
                 user_id=registerform.user_id,
                 user_pw=registerform.user_pw,
                 user_name=registerform.user_name,
-                user_email=registerform.user_email
+                user_email=registerform.user_email,
+                nationality=registerform.nationality
             )
             user.save()
             #login(request, user)
@@ -69,3 +70,7 @@ def hello(request):
     else:
         context['login_session'] = True
     return render(request, 'home.html', context)
+
+def signup_done(request):
+    cons = Users.objects
+    return render(request, 'signup_done.html', {'cons' : cons})

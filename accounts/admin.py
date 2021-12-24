@@ -10,4 +10,5 @@ class UserAdmin(admin.ModelAdmin):
         'user_pw',
         'user_name',
         'user_email',
+        'nationality',
     )

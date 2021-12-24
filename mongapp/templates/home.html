@@ -1,14 +1,9 @@
-
 <style>
     #mong{
         position: relative;
-        /*left: 41.11%;
-        right: 41.11%;
-        top: 52.34%;
-        bottom: 28.12%;*/
-        top : 100px;
+        top : 90%;
         filter: drop-shadow(4px 4px 4px rgba(166, 114, 15, 0.61));
-        z-index:1;
+        /*z-index:1;*/
     }
     #btn1{
         position: relative;
@@ -33,13 +28,15 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'mongapp/css/base.css' %}">
-<div>
-
+ 
+    <img src="{% static 'eegg.png' %}" style="position: relative; top: 20%; filter: drop-shadow(4px 4px 4px rgba(166, 114, 15, 0.61));" width =100%>
+    {% if login_session %}
+    <a href="{% url 'mymong' %}"><img src="{% static 'content.png'%}" style="position: relative; bottom: 17%; left: 41.5%;" width="18%"></a>
+    {% else %}
+    <a href="{% url 'test' %}"><img src="{% static 'btnn.png'%}" style="position: relative; bottom: 17%; left: 41.5%;" width="18%"></a>
     
-        <img id ="mong" src="{% static 'eggg.png' %}" width =100%>
-        <a href="{% url 'test' %}"><img id ="btn1" src="{% static 'btnn.png'%}" width="18%"></a>
-        <img src = "{% static 'bottom.png' %}" width = 100% bottom=10%>
-</div>
+    {% endif %}
+    
+
 
 {% endblock %}

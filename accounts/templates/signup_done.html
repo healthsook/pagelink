@@ -1,9 +1,10 @@
+{% extends 'base.html' %}
 {% block content %}
+{% for user in cons.all %}
 
-<title>회원가입 완료!</title>
 
-<h1>체질몽이 회원가입이 완료되었습니다!</h1>
+<h1>{{ user.nationality }}님 체질몽이 회원가입이 완료되었습니다!</h1>
+{% endfor %}
 
-<button button type ="button"><a href="{% url 'accounts:showlogin' %}">로그인하러 가기</a></button>
 
 {% endblock %}
