@@ -1,3 +1,4 @@
+<!--태양인 birth load 페이지-->
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
@@ -14,18 +15,6 @@
     <img src="{% static 'type.png' %}" style="position:relative;" width="33%">
 
 </div>
-    {% if '태양인' in whole %}
-    <a href="{% url 'birth_ty' %}"><img src="{% static 'rsbtn.png' %}" style="position:relative; top: 5%; left: 41.5%;" width="18%"></a>
-    {% endif %}
-    {% if '태음인' in whole %}
-        <a href="{% url 'birth_te' %}"><img src="{% static 'rsbtn.png' %}" style="position:relative; top: 5%; left: 41.5%;" width="18%"></a>
-    {% endif %}
-    {% if '소양인' in whole %}
-        <a href="{% url 'birth_sy' %}"><img src="{% static 'rsbtn.png' %}" style="position:relative; top: 5%; left: 41.5%;" width="18%"></a>
-    {% endif %}
-    {% if '소음인' in whole %}
-        <a href="{% url 'birth_se' %}"><img src="{% static 'rsbtn.png' %}" style="position:relative; top: 5%; left: 41.5%;" width="18%"></a>
-    {% endif %}
-
+<a href="{% url 'birth_ty' %}"><img src="{% static 'rsbtn.png' %}" style="position:relative; top: 5%; left: 42.5%;" width="16%"></a>
     
 {% endblock %}

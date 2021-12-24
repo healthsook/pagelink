@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<br><br><br>
+<br><br>
+<a href="{% url 'birth_load' %}"><img src="{% static 'birthbtn.png' %}" style="position: relative; left: 83%;" width="15%"></a>
 <img src="{% static 'groupty.png' %}" width="100%">
 {% endblock %}

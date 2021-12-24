@@ -75,7 +75,6 @@ def result(request):
         soy = []
         soum = []
 
-
         if form.is_valid():
             i=0
             while i<len(total):
@@ -96,14 +95,13 @@ def result(request):
             maxlen.append(len(soy))
             maxlen.append(len(soum))
             if max(maxlen) == len(taey):
-                whole.append('태양인')
+                return render(request, 'result_ty.html')
             elif max(maxlen) == len(taeum):
-                whole.append('태음인')
+                return render(request, 'result_te.html')
             elif max(maxlen) == len(soy):
-                whole.append('소양인')
+                return render(request, 'result_sy.html')
             elif max(maxlen) == len(soum):
-                whole.append('소음인')
-            return render(request, 'birth_load.html', {'whole': whole}) #피그마 '체질몽 탄생' 만든거 파일명 birth_load입니당
+                return render(request, 'result_se.html')
     else:
         form = SearchForm()
         return render(request, 'test.html', {'login_session':login_session})
@@ -112,8 +110,11 @@ def mymong(request):
     login_session = request.session.get('login_session', '')
     context = { 'login_session' : login_session }
     cons = Users.objects
+    time = Record.objects
+    zero = ['0', '1000', '2000', '3000', '4000', '5000']
+    five = ['6000', '7000', '8000', '9000']
     monguser = Users.objects.get(user_id=login_session)
-    return render(request, 'mymong.html', {'login_session' : login_session, 'cons' : cons})
+    return render(request, 'mymong.html', {'login_session' : login_session, 'cons' : cons, 'time' : time, 'zero' : zero, 'five' : five})
 
 def chid(request):
     return render(request, 'chid.html')
@@ -145,6 +146,21 @@ def birth_load(request):
     login_session = request.session.get('login_session', '')
     context = { 'login_session' : login_session }
     return render(request, 'birth_load.html', context)
+
+def birth_l_te(request):
+    login_session = request.session.get('login_session', '')
+    context = { 'login_session' : login_session }
+    return render(request, 'birth_l_te.html', context)
+
+def birth_l_sy(request):
+    login_session = request.session.get('login_session', '')
+    context = { 'login_session' : login_session }
+    return render(request, 'birth_l_sy.html', context)
+
+def birth_l_se(request):
+    login_session = request.session.get('login_session', '')
+    context = { 'login_session' : login_session }
+    return render(request, 'birth_l_se.html', context)
 
 def birth_ty(request):
     login_session = request.session.get('login_session', '')
@@ -188,7 +204,8 @@ def info_se(request):
 
 def index(request):
     login_session = request.session.get('login_session', '')
-    post_list = Record.objects.all()
+    writer = Users.objects.get(user_id=login_session)
+    post_list = Record.objects.filter(user=writer)
     return render(request, 'index.html', { 'login_session' : login_session, 'post_list': post_list })
 
 def create(request):
@@ -196,7 +213,15 @@ def create(request):
     if request.method == 'POST':
         form = RecordForm(request.POST)
         if form.is_valid():
-            form.save()
+            writer = Users.objects.get(user_id=login_session)
+            record_new = Record(
+                cal = form.cleaned_data['cal'],
+                walk = form.cleaned_data['walk'],
+                hour = form.cleaned_data['hour'],
+                min = form.cleaned_data['min'],
+                user = writer
+            )
+            record_new.save()
             return redirect('index')
     else:
         form = RecordForm()
@@ -210,7 +235,6 @@ def detail(request, post_id):
 def update(request, post_id):
     login_session = request.session.get('login_session', '')
     record = get_object_or_404(Record, pk=post_id)
-
     if request.method == 'POST':
         form = RecordForm(request.POST, instance=record)
         if form.is_valid():
@@ -246,3 +270,10 @@ def mymong_se(request):
     login_session = request.session.get('login_session', '')
     context = { 'login_session' : login_session }
     return render(request, 'mymong_se.html', context)
+
+def manage(request):
+    login_session = request.session.get('login_session', '')
+    context = { 'login_session' : login_session }
+    cons = Users.objects
+    user = Users.objects.get(user_id=login_session)
+    return render(request, 'manage.html', {'login_session' : login_session, 'cons' : cons})

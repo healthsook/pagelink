@@ -19,6 +19,9 @@ urlpatterns = [
     path('result_sy/', result_sy, name="result_sy"),
     path('result_se/', result_se, name="result_se"),
     path('birth_load/', birth_load, name="birth_load"),
+    path('birth_l_te/', birth_l_te, name="birth_l_te"),
+    path('birth_l_sy/', birth_l_sy, name="birth_l_sy"),
+    path('birth_l_se/', birth_l_se, name="birth_l_se"),
     path('birth_ty/', birth_ty, name="birth_ty"),
     path('birth_te/', birth_te, name="birth_te"),
     path('birth_sy/', birth_sy, name="birth_sy"),
@@ -36,4 +39,5 @@ urlpatterns = [
     path('mymong_te/', mymong_te, name="mymong_te"),
     path('mymong_sy/', mymong_sy, name="mymong_sy"),
     path('mymong_se/', mymong_se, name="mymong_se"),
+    path('manage/', manage, name="manage"),
 ]
