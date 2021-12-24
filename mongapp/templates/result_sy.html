@@ -37,16 +37,17 @@
     }
     .img{
         position: absolute;
-        left: 15%;
-        top: 60%;
+        left: 18%;
+        top: 52%;
+        width:20%;
     }
 </style>
 
-<img class="img" src="{% static 'mong4.png' %}" width="15%">
+<img class="img" src="{% static 'result_sy.png' %}">
 <div class = "result">
     <img src ="{% static 'sy.png' %}" width="85%">
     <div class="btnbox">
-    <button class = "btn" type ="button"><a href="{% url 'result_sy' %}" style=text-decoration-line:none;color:#684500;>맞춤형 운동법 추천받기</button>
+    <button class = "btn" type ="button"><a href="{% url 'info_sy' %}" style=text-decoration-line:none;color:#684500;>맞춤형 운동법 추천받기</button>
     </div>
 
 {% endblock %}

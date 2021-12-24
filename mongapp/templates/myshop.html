@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<style>
+    #item{
+        position:relative;
+        left:15%;
+        top:40px;
+        width:70%;
+        margin-bottom: 20px;
+    }
+    footer{
+        padding:30px;
+    }
+</style>
 
-<h2>쇼핑 페이지</h2>
-
+<h2>이 부분은 현재 포인트 나타내는 부분이에요 !</h2>
+<img id = "item" src="{% static 'shop_item.png'%}">
+<footer></footer>
 
 
 {% endblock %}
