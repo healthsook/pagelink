@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 {% if post_list %}
 <title>mong::운동 기록</title>
 <style>
+    @font-face {
+    font-family: 'bodyfont';
+    src:url('/static/KoPubDotumMedium.ttf');
+}
     .box{
         position: absolute;
         right : 38%;
@@ -40,6 +45,14 @@
         font-size:12px;
         color:gray;
     }
+    .createbox{
+        position: absolute;
+        margin-top:300px !important;
+        background-color: black;
+    }
+    p{
+        font-family: bodyfont;
+    }
 </style>
 <div class = "box">
     <ul>
@@ -48,17 +61,18 @@
             운동 시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{post.hour}}시간 {{post.min}}시간<br>
             섭취 칼로리&nbsp;&nbsp;&nbsp;&nbsp;{{post.cal}} Kcal<br><br>
             <div class="time">{{post.pub_date}}에 작성됨</div>
-        <br>
+        <br><br>
         <div class = "btnbox">
         <button class = "btn" type ="button"><a href="{% url 'update' post.id %}" style="text-decoration-line:none; color:#684500;">수정</a></button>
-        <button class = "btn" type ="button"><a href="{% url 'delete' post.id %}" style="text-decoration-line:none; color:#684500;">삭제</a></button> <!--완성되면 삭제 기능은 없앨 예정-->
+        <!--<button class = "btn" type ="button"><a href="{% url 'delete' post.id %}" style="text-decoration-line:none; color:#684500;">삭제</a></button> -->
         </div>
     {% endfor %}
     </ul>
 </div>
 {% else %}
-<div class ="creatbox">
-<a href="{% url 'create' %}">기록 생성하기</a>
+<img src="{% static 'mong_talk.png' %}" width="100%" style="position:absolute; top:180px;">
+<div class ="createbox">
+<a href="{% url 'create' %}"><img src="{% static 'record_create_btn.png' %}"width="15%" style="position:relative; top:420px; left:35%;"></a>
 </div>
 {% endif %}
 {% endblock %}
