@@ -58,7 +58,7 @@
         <a href="{% url 'home' %}"><img src="{% static 'housee.png' %}" width="3%"></a>
         <a href="{% url 'information' %}"><img src="{% static 'info.png' %}"width="4%"></a>
         {% if login_session %}
-        <a href="{% url 'mongs' %}"><img src="{% static 'mm.png' %}"width="5%"></a>
+        <a href="{% url 'manage' %}"><img src="{% static 'mm.png' %}"width="5%"></a>
         {% else %}
         <a href="{% url 'accounts:login' %}" onclick="return alert('로그인을 하셔야 이용이 가능합니다.')"><img src="{% static 'mm.png' %}"width="5%"></a>
         {% endif %}
