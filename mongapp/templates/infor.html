@@ -2,6 +2,11 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'mongapp/css/base.css' %}">
-<h2>체질 정보 페이지</h2>
-
+<br><br><br>
+&nbsp&nbsp&nbsp&nbsp&nbsp
+<a href="{% url 'info_ty' %}"><img src="{% static 'groty.png' %}" width="22%"></a> &nbsp&nbsp
+<a href="{% url 'info_te' %}"><img src="{% static 'grote.png' %}" width="23.5%"></a>&nbsp&nbsp
+<a href="{% url 'info_sy' %}"><img src="{% static 'grosy.png' %}" width="22.1%"></a>&nbsp&nbsp
+<a href="{% url 'info_se' %}"><img src="{% static 'grose.png' %}" width="25%"></a>
+<br><br><br>
 {% endblock %}

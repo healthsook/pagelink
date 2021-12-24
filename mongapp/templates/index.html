@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if post_list %}
+<title>mong::운동 기록</title>
+<style>
+    .box{
+        position: absolute;
+        right : 38%;
+        top: 160px;
+        border-radius: 30px;
+        padding-left:30px;
+        padding-bottom:30px;
+        padding-right:60px;
+        padding-top:40px;
+
+        background: #FFE8A2;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+    }
+    .btn{
+        position: relative;
+        border-radius: 30px;
+        width : 40%;
+        border : none;
+        background: #FFCF79;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: KoPubDotum;
+        font-style: normal;
+        font-size: 12px;
+        line-height: 22px;
+        text-align: center;
+        color: #684500;
+        text-align: center;
+        padding:8px;
+        padding-right:11px;
+    }
+    .btnbox{
+        text-align: center;
+    }
+    .time{
+        font-size:12px;
+        color:gray;
+    }
+</style>
+<div class = "box">
+    <ul>
+    {% for post in post_list %}
+            걸음 수 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ post.walk }} 걸음 <br>
+            운동 시간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{post.hour}}시간 {{post.min}}시간<br>
+            섭취 칼로리&nbsp;&nbsp;&nbsp;&nbsp;{{post.cal}} Kcal<br><br>
+            <div class="time">{{post.pub_date}}에 작성됨</div>
+        <br>
+        <div class = "btnbox">
+        <button class = "btn" type ="button"><a href="{% url 'update' post.id %}" style="text-decoration-line:none; color:#684500;">수정</a></button>
+        <button class = "btn" type ="button"><a href="{% url 'delete' post.id %}" style="text-decoration-line:none; color:#684500;">삭제</a></button> <!--완성되면 삭제 기능은 없앨 예정-->
+        </div>
+    {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class ="creatbox">
+<a href="{% url 'create' %}">기록 생성하기</a>
+</div>
+{% endif %}
+{% endblock %}

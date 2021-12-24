@@ -54,15 +54,26 @@
 <body>
     <div id="top">
         <img src="{% static 'name.png' %}" width="13%" style="margin-left: 4%;">
+        
         <a href="{% url 'home' %}"><img src="{% static 'housee.png' %}" width="3%"></a>
         <a href="{% url 'information' %}"><img src="{% static 'info.png' %}"width="4%"></a>
-        <a href="{% url 'mypage' %}"><img src="{% static 'my.png' %}"width="5%"></a>
-        <a href="{% url 'mongs' %}"><img src="{% static 'mm.png' %}"width="5%"></a>
-        <a href="{% url 'record' %}"><img src="{% static 'record.png' %}"width="4%"></a>
-            
         {% if login_session %}
-        <a href ="{% url 'accounts:logout' %}">logout</a>
-        
+        <a href="{% url 'mongs' %}"><img src="{% static 'mm.png' %}"width="5%"></a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" onclick="return alert('로그인을 하셔야 이용이 가능합니다.')"><img src="{% static 'mm.png' %}"width="5%"></a>
+        {% endif %}
+        {% if login_session %}
+        <a href="{% url 'record' %}"><img src="{% static 'record.png' %}"width="4%"></a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" onclick="return alert('로그인을 하셔야 이용이 가능합니다.')"><img src="{% static 'record.png' %}"width="4%"></a>
+        {% endif %}
+        {% if login_session %}
+        <a href="{% url 'myshop' %}"><img src="{% static 'shop.png' %}"width="5.3%"></a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" onclick="return alert('로그인을 하셔야 이용이 가능합니다.')"><img src="{% static 'shop.png' %}"width="5.3%"></a>
+        {% endif %}
+        {% if login_session %}
+        <a href ="{% url 'accounts:logout' %}"><img src="{% static 'logout.png' %}"width="10%"></a>
         {% else %}
         <a href="{% url 'accounts:login' %}"><img src="{% static 'login.png' %}"width="8%"></a>
         {% endif %}

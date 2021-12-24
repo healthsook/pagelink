@@ -2,6 +2,13 @@ from django import forms
 from .models import Users
 from argon2 import PasswordHasher, exceptions
 
+NATIONAL_CHOICES = (
+        ('TY', '태양인'),
+        ('TE', '태음인'),
+        ('SY', '소양인'),
+        ('SE', '소음인')
+    )
+
 class RegisterForm(forms.ModelForm):
     user_id = forms.CharField(
         label='아이디',
@@ -60,12 +67,19 @@ class RegisterForm(forms.ModelForm):
         ),
         error_messages={'required' : '이메일을 입력해주세요.'}
     )
+    nationality = forms.ChoiceField(
+        label='나의 체질은',
+        choices=NATIONAL_CHOICES,
+        error_messages={'required' : '나의 체질을 선택해주세요.'}
+    )
+    
     field_order = [
         'user_id',
         'user_pw',
         'user_pw_confirm',
         'user_name',
-        'user_email'
+        'user_email',
+        'nationality'
     ]
 
     class Meta:
@@ -74,7 +88,8 @@ class RegisterForm(forms.ModelForm):
             'user_id',
             'user_pw',
             'user_name',
-            'user_email'
+            'user_email',
+            'nationality'
         ]
     
     def clean(self):
@@ -85,6 +100,7 @@ class RegisterForm(forms.ModelForm):
         user_pw_confirm = cleaned_data.get('user_pw_confirm', '')
         user_name = cleaned_data.get('user_name', '')
         user_email = cleaned_data.get('user_email', '')
+        nationality = cleaned_data.get('nationality', '')
 
         if user_pw != user_pw_confirm:
             return self.add_error('user_pw_confirm', '비밀번호가 다릅니다.')
@@ -98,6 +114,7 @@ class RegisterForm(forms.ModelForm):
             self.user_pw_confirm = user_pw_confirm
             self.user_name = user_name
             self.user_email = user_email
+            self.nationality = nationality
 
 class LoginForm(forms.Form):
     user_id = forms.CharField(
