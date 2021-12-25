@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<style>
+    body{
+        background-color: #FFF9EB !important;
+    }
+</style>
 <br>
 <a href="{% url 'mymong' %}"><img src="{% static 'content.png' %}" style="position: relative; left: 83%;" width="15%"></a>
 {% for user in cons.all %}
 {% if user.user_id == login_session %}
 <br><br>
-<button></button>
 
 {% if user.nationality == 'TY' %}
 <img src="{% static 'evoty.png' %}" style="position: relative; left: 20%;" width="60%">
