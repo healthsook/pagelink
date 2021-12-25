@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from accounts.models import Users
 
+
 # Create your models here.
 
 class Record(models.Model):

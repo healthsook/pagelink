@@ -28,15 +28,12 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
- 
-    <img src="{% static 'eegg.png' %}" style="position: relative; top: 20%; filter: drop-shadow(4px 4px 4px rgba(166, 114, 15, 0.61));" width =100%>
-    {% if login_session %}
-    <a href="{% url 'mymong' %}"><img src="{% static 'content.png'%}" style="position: relative; bottom: 17%; left: 41.5%;" width="18%"></a>
-    {% else %}
-    <a href="{% url 'test' %}"><img src="{% static 'btnn.png'%}" style="position: relative; bottom: 17%; left: 41.5%;" width="18%"></a>
-    
-    {% endif %}
-    
+<img src="{% static 'eegg.png' %}" style="position: relative; top: 20%; filter: drop-shadow(4px 4px 4px rgba(166, 114, 15, 0.61));" width =100%>
 
+{% if login_session %}
+<a href="{% url 'mymong' %}"><img src="{% static 'content.png'%}" style="position: relative; bottom: 19%; left: 41.5%;" width="18%"></a>
+{% else %}
+<a href="{% url 'test' %}"><img src="{% static 'btnn.png'%}" style="position: relative; bottom: 19%; left: 41.5%;" width="18%"></a>
+{% endif %}
 
 {% endblock %}

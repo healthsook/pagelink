@@ -8,6 +8,8 @@ from .models import Record, Mongs
 from django.urls import reverse
 from datetime import datetime
 from accounts.models import Users
+from datetime import datetime
+from django.utils.dateformat import DateFormat
 # Create your views here.
 
 def home(request):
@@ -110,11 +112,15 @@ def mymong(request):
     login_session = request.session.get('login_session', '')
     context = { 'login_session' : login_session }
     cons = Users.objects
-    time = Record.objects
+    today = DateFormat(datetime.now()).format('b. d, Y')
+    format = '%b. %d, %Y'
+    dt_datetime = datetime.strptime(today,format)
+    time = Record.objects.filter(pub_date = dt_datetime)
     zero = ['0', '1000', '2000', '3000', '4000', '5000']
     five = ['6000', '7000', '8000', '9000']
+    no = None
     monguser = Users.objects.get(user_id=login_session)
-    return render(request, 'mymong.html', {'login_session' : login_session, 'cons' : cons, 'time' : time, 'zero' : zero, 'five' : five})
+    return render(request, 'mymong.html', {'login_session' : login_session, 'cons' : cons, 'time' : time, 'zero' : zero, 'five' : five, 'no' : no})
 
 def chid(request):
     return render(request, 'chid.html')
@@ -205,7 +211,12 @@ def info_se(request):
 def index(request):
     login_session = request.session.get('login_session', '')
     writer = Users.objects.get(user_id=login_session)
-    post_list = Record.objects.filter(user=writer)
+    today = DateFormat(datetime.now()).format('b. d, Y')
+    format = '%b. %d, %Y'
+    dt_datetime = datetime.strptime(today,format)
+    post_list = Record.objects.filter(
+        user=writer,
+        pub_date = dt_datetime)
     return render(request, 'index.html', { 'login_session' : login_session, 'post_list': post_list })
 
 def create(request):

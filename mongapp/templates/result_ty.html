@@ -40,13 +40,16 @@
         left: 15%;
         top: 50%;
     }
+    body{
+        background-color: #FFF9EB !important;
+    }
 </style>
-<h1>{{whole}}</h1>
+
 <img class="img" src="{% static 'result_ty.png' %}" width="20%">
 <div class = "result">
     <img src ="{% static 'ty.png' %}" width="95%">
     <div class="btnbox">
-    <button class = "btn" type ="button"><a href="{% url 'info_ty' %}" style=text-decoration-line:none;color:#684500;>맞춤형 운동법 추천받기</button>
+        <a href="{% url 'birth_load' %}"><img src="{% static 'birthbtn.png' %}" style="position: relative; left: 50%;" width="30%"></a>
     </div>
 
 {% endblock %}

@@ -8,7 +8,7 @@
         text-align: center;
     }
     input#btn{
-        background: url('/static/record_btn.png');
+        background: url('/static/record_write_btn.png');
         background-position:  0px 3px;
         background-repeat: no-repeat;
         background-size: 130px;
@@ -16,14 +16,18 @@
         height:50px;
         border-style: none;
     }
+    hr{
+        border: 0;
+        height: 2px;
+        background:#915417;
+    }
+    body{
+        background-color: #FFF9EB !important;
+    }
 </style>
 <form method="post">
     <div class="formbox">
-        <div class = "imgbox">
         <img src="{% static 'record_char.png' %}" width="30%">
-        </div>
-        <br>
-        <br>
         {% csrf_token %}
         {{ form.as_p }}
         <br>

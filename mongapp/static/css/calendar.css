@@ -16,7 +16,7 @@ body{
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
 }
 .calendar_cell_today{
-    background-color: #DFDFDF;
+    background-color: #FFC976;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     padding:5px;

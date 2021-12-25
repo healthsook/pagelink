@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<style>
+    body{
+        background-color: #FFF9EB !important;
+    }
+</style>
 <br><br>
-<a href="{% url 'birth_l_te' %}"><img src="{% static 'birthbtn.png' %}" style="position: relative; left: 83%;" width="15%"></a>
 <img src="{% static 'groupte.png' %}" width="100%">
 {% endblock %}

@@ -40,13 +40,16 @@
         left: 17%;
         top: 50%;
     }
+    body{
+        background-color: #FFF9EB !important;
+    }
 </style>
 
 <img class="img" src="{% static 'result_se.png' %}" width="20%">
 <div class = "result">
-    <img src ="{% static 'se.png' %}" width="85%">
+    <img src ="{% static 'se-2.png' %}" width="85%">
     <div class="btnbox">
-    <button class = "btn" type ="button"><a href="{% url 'info_se' %}" style=text-decoration-line:none;color:#684500;>맞춤형 운동법 추천받기</button>
+        <a href="{% url 'birth_l_se' %}"><img src="{% static 'birthbtn.png' %}" style="position: relative; left: 50%;" width="30%"></a>
     </div>
 
 {% endblock %}
